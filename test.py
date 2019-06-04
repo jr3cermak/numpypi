@@ -4,6 +4,7 @@ import hashlib
 import numpy
 import pintrinsics
 import scipy.io.netcdf
+import netCDF4
 
 def test(fn, val, label, prod=''):
     if val is None:
@@ -16,7 +17,7 @@ def test(fn, val, label, prod=''):
     return res
 
 def writefile(filename, vals):
-    f = scipy.io.netcdf.netcdf_file(filename, 'w')
+    f = netCDF4.Dataset(filename, 'w', clobber=True, format='NETCDF3_CLASSIC')
     v = f.createDimension('n', len(vals) )
     v = f.createVariable('results', 'f8', ('n',))
     v[:] = numpy.array(vals)[:]

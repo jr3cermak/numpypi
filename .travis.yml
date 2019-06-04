@@ -7,7 +7,7 @@ addons:
     - netcdf-bin
 
 install:
-  - pip install scipy
+  - pip install scipy netcdf4
 
 python:
   - "2.7"
@@ -18,9 +18,4 @@ python:
   - "3.8-dev"
 
 script:
-  - python test.py
-  - ncdump test1.nc > test1.cdf
-  - ncdump test1.nc > test2.cdf
-  - git diff
-  - md5sum *.nc
-  - md5sum -c test.md5
+  - make
