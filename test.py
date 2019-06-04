@@ -4,15 +4,16 @@ import hashlib
 import numpy
 import pintrinsics
 import netCDF4
+import struct
 
 def test(fn, val, label, prod=''):
     if val is None:
         res = fn()
     else: 
         res = fn(val)
-    s = str(res)
-    h = hashlib.sha224( s.encode('utf-8') ).hexdigest()
-    print(prod, label, '\t', h, 'x =', str(val), 'fn() =', s)
+    i = struct.unpack( 'q', struct.pack('d',res) )
+    h = hashlib.sha224( str(i).encode('utf-8') ).hexdigest()
+    print(prod, label, '\t', h, 'x =', str(val), 'fn() =', str(res))
     return res
 
 def writefile(filename, vals):
@@ -48,6 +49,5 @@ P.append( test( pifn, None, 'pi    ', prod='numpy') )
 pi = pifn()
 for a in range(1,11):
   P.append( test( numpy.sin, 0.025*pi*a, 'sin(x)', prod='numpy') )
-for a in range(1,11):
   P.append( test( numpy.cos, 0.025*pi*a, 'cos(x)', prod='numpy') )
 writefile('test2.nc', P)
