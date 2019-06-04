@@ -12,7 +12,7 @@ def test(fn, val, label, prod=''):
         res = fn(val)
     s = str(res)
     h = hashlib.sha224( s.encode('utf-8') ).hexdigest()
-    print(prod, label, b'\t', h, 'x =', str(val), 'fn() =', s)
+    print(prod, label, '\t', h, 'x =', str(val), 'fn() =', s)
     return res
 
 def writefile(filename, vals):
