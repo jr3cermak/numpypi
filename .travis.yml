@@ -11,3 +11,5 @@ python:
 
 script:
   - python test.py
+  - md5sum *.nc
+  - md5sum -c test.md5
