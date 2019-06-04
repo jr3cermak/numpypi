@@ -14,5 +14,8 @@ python:
 
 script:
   - python test.py
+  - ncdump test1.nc > test1.cdf
+  - ncdump test1.nc > test2.cdf
+  - git diff
   - md5sum *.nc
   - md5sum -c test.md5
