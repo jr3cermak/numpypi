@@ -69,19 +69,33 @@ def pi(n=5, verbose=False):
     r = an**2 * reciprocal(t)
     return r
 
-def sine(x, n=21, verbose=False):
+def sine(x, n=20, verbose=False, efficient=False):
     """Returns sin(x)"""
+    assert n<21,'n must be >0 and <21'
     # https://en.wikipedia.org/wiki/Sine#Series_definition
-    C=[0.16666666666666666,0.05,0.023809523809523808,0.013888888888888888,0.00909090909090909,0.00641025641025641,0.004761904761904762,0.003676470588235294,0.0029239766081871343,0.002380952380952381,0.001976284584980237,0.0016666666666666667,0.0014245014245014246,0.0012315270935960591,0.001075268817204301,0.000946969696969697,0.0008403361344537816,0.0007507507507507507,0.0006747638326585695]
-    ro,f,s = x,1.,-1.
-    for i in range(1,n):
-        k = 2*i + 1
-        #f = f * pypi.reciprocal( (k-1)*k ) # These should be pre-computed
-        f = f * C[i-1]
-        r = ro + x**k * f * s
+    C=[0.16666666666666667,0.05,0.023809523809523808,0.013888888888888889,0.00909090909090909,0.00641025641025641,0.004761904761904762,0.003676470588235294,0.0029239766081871343,0.002380952380952381,0.001976284584980237,0.0016666666666666667,0.0014245014245014246,0.0012315270935960591,0.001075268817204301,0.000946969696969697,0.0008403361344537816,0.0007507507507507507,0.0006747638326585695]
+    if efficient:
+        ro,f,s = x,1.,-1.
+        for i in range(1,n):
+            k = 2*i + 1
+            #f = f * pypi.reciprocal( (k-1)*k ) # These should be pre-computed
+            f = f * C[i-1]
+            r = ro + x**k * f * s
+            if verbose: print('sine:',r,'(%i)'%i)
+            #if r==ro: break
+            ro,s = r, -s
+    else:
+        f,r,s = [1.]*(n),0.,1.
+        if n%2==0: s=-1.
+        for i in range(1,n):
+            f[i] = f[i-1] * C[i-1]
+        for i in range(n-1,0,-1):
+            k = 2*i + 1
+            r = r + x**k * f[i] * s
+            if verbose: print('sine:',r,'(%i)'%i)
+            s = -s
+        r = r + x
         if verbose: print('sine:',r,'(%i)'%i)
-        if r==ro: break
-        ro,s = r, -s
     return r
 
 def cosine(x, n=21, verbose=False):
