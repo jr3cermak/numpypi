@@ -30,7 +30,7 @@ def compare_numbers(x, y, good_hash=None):
             i = k[j]
             a,b,e,f = x[i],y[i],error[i],frac[i]
             print('      x(%i)=%23.15e y(%i)=%23.15e error=%.5e frac. err.=%.2e'%(i,a,i,b,e,f))
-        print('   Largest fractional = %.2e'%numpy.abs( frac ).max() )
+        print('   Largest fractional error = %.2e'%numpy.abs( frac ).max() )
         status = False
     # Bitwise (hash) test
     hx = hashlib.sha256( numpy.array( x ) ).hexdigest()
@@ -140,16 +140,45 @@ x = numpy.array([ numpy.sin(numpy.pi/4), numpy.cos(numpy.pi/4), numpy.tan(numpy.
 y = numpy.array([ numpy.sqrt(2)/2, numpy.sqrt(2)/2,  1.0 ])
 assert compare_numbers(x, y), 'numpi intrinsics failed to reproduce!'
 
-print('Check numpi intrinsics with rounding bits=12 for range of values')
+print('Check numpi intrinsic sin() with rounding bits=12 for range of values')
 numpy.set_rounding_bits(12)
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
 sin_hash = 'd1a2078401dc8020f19bdad13873765a319fa037c7da80a5289bf292918bb368'
 assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
 
-print('numpy-numpi intrinsics frequency of hits with rounding bits = 1 (informational only, not a test')
+print('Check numpi intrinsic cos() with rounding bits=12 for range of values')
+numpy.set_rounding_bits(12)
+x = numpy.cos( (x01 - 0.5)*numpy.pi )
+cos_hash = '6fd30baf6dc80ed098cbfaebabd85478a13c4fefd9679601bd9ebed4f946b6c5'
+assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
+
+print('Check numpi intrinsic tan() with rounding bits=12 for range of values')
+numpy.set_rounding_bits(12)
+x = numpy.tan( (x01 - 0.5)*numpy.pi )
+tan_hash = '33de75e67b47e3f8bc867dd62eca8fae1c966eee38927898a354d14608c038af'
+assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
+
+print('Check numpi intrinsic arcsin() with rounding bits=12 for range of values')
+numpy.set_rounding_bits(12)
+x = numpy.arcsin( 2.*x01 - 1. )
+arcsin_hash = 'ea1080e16ae6aed8da973f9edbc77252810f26063560a93270d2ef2bba89a176'
+assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() failed to reproduce recorded hash!'
+
+print('Check numpi intrinsic arccos() with rounding bits=12 for range of values')
+numpy.set_rounding_bits(12)
+x = numpy.arccos( 2.*x01 - 1. )
+arccos_hash = '2ee1dc8ecc794df21fe93d008d76a3d2499040260ed2a65e264ab92d4aedd6d8'
+assert compare_numbers(x, x, good_hash=arccos_hash), 'numpi intrinsic arccos() failed to reproduce recorded hash!'
+
+print('Check numpi intrinsic arctan() with rounding bits=12 for range of values')
+numpy.set_rounding_bits(12)
+x = numpy.arctan( 2.*x01 - 1. )
+arctan_hash = '23caeb9e0ef686133c8d519a5de5b50e309567c9a9dc6ce5ce1a9e6347b7b4a3'
+assert compare_numbers(x, x, good_hash=arctan_hash), 'numpi intrinsic arctan() failed to reproduce recorded hash!'
+
+#print('numpy-numpi intrinsics frequency of hits with rounding bits = 1 (informational only, not a test)')
 numpy.unset_rounding_bits()
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
 numpy.set_rounding_bits(1)
 y = numpy.sin( (x01 - 0.5)*numpy.pi )
-assert not compare_numbers(x, y), 'numpy numpi intrinsics unexpectedly matched!'
-
+#assert not compare_numbers(x, y), 'numpy numpi intrinsics unexpectedly matched!'
