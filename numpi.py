@@ -2,7 +2,7 @@ from __future__ import print_function
 
 # The following import allows all the numpy modules/functions to be accessed
 # as if they were in this module. i.e.
-#   import pnumpy as np
+#   import numpi as np
 # will work as if it read "import numpy as np"
 from numpy import *
 

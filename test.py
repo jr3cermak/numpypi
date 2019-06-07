@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 import hashlib
-import pnumpy as numpy  # Module to test
+import numpi as numpy  # Module to test
 
 def logistic_map(x, r=4.-1./32):
     """Logistic map r*x*(1-x)"""
@@ -86,44 +86,44 @@ assert compare_numbers(x, x, good_hash=max_hash), 'numpy.pi did not reproduce'
 print('Check that pass through to numpy works')
 x = numpy.finfo(float).max * ( 2.*x01 - 1. )
 y = numpy.round_lastbits(x)
-assert compare_numbers(x, y), 'pnumpy without rounding did not reproduce!'
+assert compare_numbers(x, y), 'numpi without rounding did not reproduce!'
 
-print('Check pnumpy with rounding bits = 0')
+print('Check numpi with rounding bits = 0')
 numpy.set_rounding_bits(0)
 y = numpy.round_lastbits(x)
-assert compare_numbers(x, y), 'pnumpy with rounding bits=0 did not reproduce!'
+assert compare_numbers(x, y), 'numpi with rounding bits=0 did not reproduce!'
 
-print('Check pnumpy with rounding bits = 1')
+print('Check numpi with rounding bits = 1')
 numpy.set_rounding_bits(1)
 y = numpy.round_lastbits(x)
 assert not compare_numbers(x, y), 'No differences detected using rounding bits=1!'
 
-print('Check pnumpy with rounding bits = 2')
+print('Check numpi with rounding bits = 2')
 numpy.set_rounding_bits(2)
 y = numpy.round_lastbits(x)
 assert not compare_numbers(x, y), 'No differences detected using rounding bits=2!'
 
-print('Check pnumpy with rounding bits = 4')
+print('Check numpi with rounding bits = 4')
 numpy.set_rounding_bits(4)
 y = numpy.round_lastbits(x)
 assert not compare_numbers(x, y), 'No differences detected using rounding bits=4!'
 
-print('Check pnumpy with rounding bits = 8')
+print('Check numpi with rounding bits = 8')
 numpy.set_rounding_bits(8)
 y = numpy.round_lastbits(x)
 assert not compare_numbers(x, y), 'No differences detected using rounding bits=8!'
 
-print('Check pnumpy with rounding bits = 10')
+print('Check numpi with rounding bits = 10')
 numpy.set_rounding_bits(10)
 y = numpy.round_lastbits(x)
 assert not compare_numbers(x, y), 'No differences detected using rounding bits=10!'
 
-print('Check pnumpy with rounding bits = 12')
+print('Check numpi with rounding bits = 12')
 numpy.set_rounding_bits(12)
 y = numpy.round_lastbits(x)
 assert not compare_numbers(x, y), 'No differences detected using rounding bits=12!'
 
-print('Check pnumpy with rounding bits = 16')
+print('Check numpi with rounding bits = 16')
 numpy.set_rounding_bits(16)
 y = numpy.round_lastbits(x)
 assert not compare_numbers(x, y), 'No differences detected using rounding bits=16!'
@@ -134,22 +134,22 @@ x = numpy.array([ numpy.sin(numpy.pi/4), numpy.cos(numpy.pi/4), numpy.tan(numpy.
 y = numpy.array([ numpy.sqrt(2)/2, numpy.sqrt(2)/2,  1.0 ])
 assert not compare_numbers(x, y), 'numpy intrinsics unexpectedly matched!'
 
-print('Check pnumpy intrinsics with rounding bits=2 for special values')
+print('Check numpi intrinsics with rounding bits=2 for special values')
 numpy.set_rounding_bits(2)
 x = numpy.array([ numpy.sin(numpy.pi/4), numpy.cos(numpy.pi/4), numpy.tan(numpy.pi/4) ])
 y = numpy.array([ numpy.sqrt(2)/2, numpy.sqrt(2)/2,  1.0 ])
-assert compare_numbers(x, y), 'pnumpy intrinsics failed to reproduce!'
+assert compare_numbers(x, y), 'numpi intrinsics failed to reproduce!'
 
-print('Check pnumpy intrinsics with rounding bits=12 for range of values')
+print('Check numpi intrinsics with rounding bits=12 for range of values')
 numpy.set_rounding_bits(12)
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
 sin_hash = 'd1a2078401dc8020f19bdad13873765a319fa037c7da80a5289bf292918bb368'
-assert compare_numbers(x, x, good_hash=sin_hash), 'pnumpy intrinsic sin() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
 
-print('numpy-pnumpy intrinsics frequency of hits with rounding bits = 1 (informational only, not a test')
+print('numpy-numpi intrinsics frequency of hits with rounding bits = 1 (informational only, not a test')
 numpy.unset_rounding_bits()
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
 numpy.set_rounding_bits(1)
 y = numpy.sin( (x01 - 0.5)*numpy.pi )
-assert not compare_numbers(x, y), 'numpy pnumpy intrinsics unexpectedly matched!'
+assert not compare_numbers(x, y), 'numpy numpi intrinsics unexpectedly matched!'
 
