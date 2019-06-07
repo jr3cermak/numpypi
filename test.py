@@ -152,28 +152,28 @@ x = numpy.cos( (x01 - 0.5)*numpy.pi )
 cos_hash = '6fd30baf6dc80ed098cbfaebabd85478a13c4fefd9679601bd9ebed4f946b6c5'
 assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic tan() with rounding bits=12 for range of values')
-numpy.set_rounding_bits(12)
+print('Check numpi intrinsic tan() with rounding bits=14 for range of values')
+numpy.set_rounding_bits(14)
 x = numpy.tan( (x01 - 0.5)*numpy.pi )
-tan_hash = '33de75e67b47e3f8bc867dd62eca8fae1c966eee38927898a354d14608c038af'
+tan_hash = '5eb573464346afd1c9b567c237a3ff4c8485c9c4c2bda108e955ba0aa8084cc7'
 assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic arcsin() with rounding bits=12 for range of values')
-numpy.set_rounding_bits(12)
+print('Check numpi intrinsic arcsin() with rounding bits=16 for range of values')
+numpy.set_rounding_bits(16)
 x = numpy.arcsin( 2.*x01 - 1. )
-arcsin_hash = 'ea1080e16ae6aed8da973f9edbc77252810f26063560a93270d2ef2bba89a176'
+arcsin_hash = '0c8cc44f1b24b2fd2c18dccc0638a9f54758ebfdcdc21d600c7f1b2e647baf4a'
 assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic arccos() with rounding bits=12 for range of values')
-numpy.set_rounding_bits(12)
+print('Check numpi intrinsic arccos() with rounding bits=16 for range of values')
+numpy.set_rounding_bits(16)
 x = numpy.arccos( 2.*x01 - 1. )
-arccos_hash = '2ee1dc8ecc794df21fe93d008d76a3d2499040260ed2a65e264ab92d4aedd6d8'
+arccos_hash = '2db2ba8daaa85a5365cd0ae6b8bb90749f4fc29b61ffb8a9d0ca959b47014787'
 assert compare_numbers(x, x, good_hash=arccos_hash), 'numpi intrinsic arccos() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic arctan() with rounding bits=12 for range of values')
-numpy.set_rounding_bits(12)
+print('Check numpi intrinsic arctan() with rounding bits=16 for range of values')
+numpy.set_rounding_bits(16)
 x = numpy.arctan( 2.*x01 - 1. )
-arctan_hash = '23caeb9e0ef686133c8d519a5de5b50e309567c9a9dc6ce5ce1a9e6347b7b4a3'
+arctan_hash = '51c4c9529631a1026159dd9479b4216de65807fd08b9c0a79f4ca44e686f8ae4'
 assert compare_numbers(x, x, good_hash=arctan_hash), 'numpi intrinsic arctan() failed to reproduce recorded hash!'
 
 #print('numpy-numpi intrinsics frequency of hits with rounding bits = 1 (informational only, not a test)')
