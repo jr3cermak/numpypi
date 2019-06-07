@@ -39,25 +39,26 @@ def unset_rounding_bits():
     __default_bits = None
 
 def sin(*args, **kwargs):
-    global __default_bits
-    return round_lastbits( _numpy.sin( *args, **kwargs ), bits=__default_bits )
+    return round_lastbits(_numpy.sin(*args, **kwargs))
 
 def cos(*args, **kwargs):
-    global __default_bits
-    return round_lastbits( _numpy.cos( *args, **kwargs ), bits=__default_bits )
+    return round_lastbits(_numpy.cos(*args, **kwargs))
 
 def tan(*args, **kwargs):
-    global __default_bits
-    return round_lastbits( _numpy.tan( *args, **kwargs ), bits=__default_bits )
+    return round_lastbits(_numpy.tan(*args, **kwargs))
 
 def arcsin(*args, **kwargs):
-    global __default_bits
-    return round_lastbits( _numpy.arcsin( *args, **kwargs ), bits=__default_bits )
+    return round_lastbits(_numpy.arcsin(*args, **kwargs))
 
 def arccos(*args, **kwargs):
-    global __default_bits
-    return round_lastbits( _numpy.arccos( *args, **kwargs ), bits=__default_bits )
+    return round_lastbits(_numpy.arccos(*args, **kwargs))
 
 def arctan(*args, **kwargs):
-    global __default_bits
-    return round_lastbits( _numpy.arctan( *args, **kwargs ), bits=__default_bits )
+    return round_lastbits(_numpy.arctan(*args, **kwargs))
+
+def sqrt(*args, **kwargs):
+    return round_lastbits(_numpy.sqrt(*args, **kwargs))
+
+# These functions are needed because of a collision between python and numpy function names
+def abs(*args, **kwargs):
+    return _numpy.absolute(*args, **kwargs)
