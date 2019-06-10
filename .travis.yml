@@ -1,14 +1,6 @@
 dist: xenial
 language: python
 
-addons:
-  apt:
-    packages:
-    - netcdf-bin
-
-install:
-  - pip install scipy netcdf4
-
 python:
   - "2.7"
   - "3.6"
@@ -17,5 +9,4 @@ python:
   - "3.7-dev"
 
 script:
-  - make
-  - make check
+  - python test_trunc.py
