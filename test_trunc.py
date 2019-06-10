@@ -15,21 +15,21 @@ def generate_numbers(n, r=4.-1./32, x0=0.5, n0=0):
     for k in range(1,n):
         x[k] = logistic_map( x[k-1], r=r)
     return x
-def compare_numbers(x, y, good_hash=None):
+def compare_numbers(x, y, good_hash=None, quiet=False):
     # Compare hashes
     status = True
     # Numerical test
     error = ( x - y )
     n = numpy.count_nonzero( error )
     if n>0:
-        print(' X There were %i differences detected (out of %i) or %3.4f%% hits.'%(n,error.size,(100.*n)/error.size))
+        if not quiet: print(' X There were %i differences detected (out of %i) or %3.4f%% hits.'%(n,error.size,(100.*n)/error.size))
         k = numpy.nonzero( error )[0]
-        print('   First few values ...')
+        if not quiet: print('   First few values ...')
         frac = error / x
         for j in range( min(n, 5) ):
             i = k[j]
             a,b,e,f = x[i],y[i],error[i],frac[i]
-            print('      x(%i)=%23.15e y(%i)=%23.15e error=%.5e frac. err.=%.2e'%(i,a,i,b,e,f))
+            if not quiet: print('      x(%i)=%23.15e y(%i)=%23.15e error=%.5e frac. err.=%.2e'%(i,a,i,b,e,f))
         print('   Largest fractional error = %.2e'%numpy.abs( frac ).max() )
         status = False
     # Bitwise (hash) test
@@ -96,43 +96,43 @@ assert compare_numbers(x, y), 'numpi with rounding bits=0 did not reproduce!'
 print('Check numpi with rounding bits = 1')
 numpy.set_rounding_bits(1)
 y = numpy.round_lastbits(x)
-assert not compare_numbers(x, y), 'No differences detected using rounding bits=1!'
+assert not compare_numbers(x, y, quiet=True), 'No differences detected using rounding bits=1!'
 
 print('Check numpi with rounding bits = 2')
 numpy.set_rounding_bits(2)
 y = numpy.round_lastbits(x)
-assert not compare_numbers(x, y), 'No differences detected using rounding bits=2!'
+assert not compare_numbers(x, y, quiet=True), 'No differences detected using rounding bits=2!'
 
 print('Check numpi with rounding bits = 4')
 numpy.set_rounding_bits(4)
 y = numpy.round_lastbits(x)
-assert not compare_numbers(x, y), 'No differences detected using rounding bits=4!'
+assert not compare_numbers(x, y, quiet=True), 'No differences detected using rounding bits=4!'
 
 print('Check numpi with rounding bits = 8')
 numpy.set_rounding_bits(8)
 y = numpy.round_lastbits(x)
-assert not compare_numbers(x, y), 'No differences detected using rounding bits=8!'
+assert not compare_numbers(x, y, quiet=True), 'No differences detected using rounding bits=8!'
 
 print('Check numpi with rounding bits = 10')
 numpy.set_rounding_bits(10)
 y = numpy.round_lastbits(x)
-assert not compare_numbers(x, y), 'No differences detected using rounding bits=10!'
+assert not compare_numbers(x, y, quiet=True), 'No differences detected using rounding bits=10!'
 
 print('Check numpi with rounding bits = 12')
 numpy.set_rounding_bits(12)
 y = numpy.round_lastbits(x)
-assert not compare_numbers(x, y), 'No differences detected using rounding bits=12!'
+assert not compare_numbers(x, y, quiet=True), 'No differences detected using rounding bits=12!'
 
 print('Check numpi with rounding bits = 16')
 numpy.set_rounding_bits(16)
 y = numpy.round_lastbits(x)
-assert not compare_numbers(x, y), 'No differences detected using rounding bits=16!'
+assert not compare_numbers(x, y, quiet=True), 'No differences detected using rounding bits=16!'
 
 print('Check numpy intrinsics for special values')
 numpy.unset_rounding_bits()
 x = numpy.array([ numpy.sin(numpy.pi/4), numpy.cos(numpy.pi/4), numpy.tan(numpy.pi/4) ])
 y = numpy.array([ numpy.sqrt(2)/2, numpy.sqrt(2)/2,  1.0 ])
-assert not compare_numbers(x, y), 'numpy intrinsics unexpectedly matched!'
+assert not compare_numbers(x, y, quiet=True), 'numpy intrinsics unexpectedly matched!'
 
 print('Check numpi intrinsics with rounding bits=2 for special values')
 numpy.set_rounding_bits(2)
