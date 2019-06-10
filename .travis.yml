@@ -9,4 +9,4 @@ python:
   - "3.7-dev"
 
 script:
-  - python test.py
+  - python test_trunc.py
