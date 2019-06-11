@@ -76,15 +76,16 @@ assert compare_numbers(x01, x01, good_hash=x01_hash), 'Generated test numbers di
 print('Check that PI (numpy.pi) is bitwise as expected')
 x = numpy.array([numpy.pi])
 pi_hash = '8b5319c77d1df2dcfcc3c1d94ab549a29d2b8b9f61372dc803146cbb1d2800b9'
-compare_numbers(x, x, good_hash=pi_hash), 'numpy.pi did not reproduce'
+assert compare_numbers(x, x, good_hash=pi_hash), 'numpy.pi did not reproduce'
 
 print('Check that maximum floating point number (numpy.finfo.max) is bitwise as expected')
 x = numpy.array([numpy.finfo(float).max])
 max_hash = 'dd46fdd197731f40f29d789fd02be525b10ff16ea3b7830c9f2c5b28131420ff'
 assert compare_numbers(x, x, good_hash=max_hash), 'numpy.pi did not reproduce'
 
-print('Check that pass through to numpy works')
+print('Check that pass through to numpy works (no rounding)')
 x = numpy.finfo(float).max * ( 2.*x01 - 1. )
+numpy.unset_rounding_bits()
 y = numpy.round_lastbits(x)
 assert compare_numbers(x, y), 'numpi without rounding did not reproduce!'
 
