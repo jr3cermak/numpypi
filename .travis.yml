@@ -10,3 +10,4 @@ python:
 
 script:
   - python test_trunc.py
+  - python test_series.py
