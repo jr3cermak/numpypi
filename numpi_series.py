@@ -132,6 +132,28 @@ def cos_series(x):
         r,s = r + x**k * f * s, -s
     return r
 
+def tan(x):
+    """Returns tan(x)"""
+    a = abs(x)
+    s = 1. + 0.*a
+    s[x<0] = -1.
+    # Reduce range 45 ... 90 to 22.5 ... 45
+    j4 = ( a>=0.25*pi )
+    a[j4] = 0.5 * a[j4]
+    # Reduce range 22.5 ... 45 to 12.25 ... 22.5
+    j2 = ( a>=0.125*pi )
+    a[j2] = 0.5 * a[j2]
+    t = tan_series( a )
+    d = 1. / ( 1. - t**2 )
+    t[j2] = 2.*t[j2] *d[j2]
+    t = _numpy._numpy.minimum(1., t)
+    d = ( 1. - t**2 )
+    jinf = ( d == 0. ) # Catch division by zero
+    d = 1. / maximum( 1.e-30, d )
+    t[j4] = 2.*t[j4] * d[j4]
+    t[jinf] = _numpy._numpy.inf
+    return t * s
+
 def tan_series(x):
     """Returns tan(x) for x in range -pi/6 .. pi/6"""
     # http://oeis.org/A002430
@@ -147,27 +169,3 @@ def tan_series(x):
     for j in range(k,-1,-1):
         r = r + term[j]
     return r * x
-
-def tan(x):
-    """Returns tan(x)"""
-    a = abs(x)
-    s = 1. + 0.*a
-    s[x<0] = -1.
-    #n = floor( a / pi * 0.5 )
-    #a = a - n * pi * 2
-    #j = ( _numpy._numpy.mod(n,2)==1 )
-    #s[j] = -s[j]
-    # Reduce range 45 ... 90 to 22.5 ... 45
-    j4 = ( a>=0.25*pi )
-    a[j4] = 0.5 * a[j4]
-    # Reduce range 22.5 ... 45 to 12.25 ... 22.5
-    j2 = ( a>=0.125*pi )
-    a[j2] = 0.5 * a[j2]
-    t = tan_series( a )
-    t[j2] = 2.*t[j2] / ( ( 1. - t[j2] ) * ( 1. + t[j2] ) )
-    t = _numpy._numpy.minimum(1., t)
-    d = ( 1. - t**2 )
-    jinf = ( d == 0. ) # Catch division by zero
-    t[j4] = 2.*t[j4] / maximum( 1.e-30, d[j4] )
-    t[jinf] = 1.e300
-    return t * s

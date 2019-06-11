@@ -103,9 +103,9 @@ assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed 
 #assert x.min() >= -1., 'numpi cos(x)<-1 !'
 #assert x.max() <= 1., 'numpi cos(x)<-1 !'
 
-print('Check numpi intrinsic tan() for range (+/- pi/8)')
-x = numpy.tan( (x01 - 0.5)*numpy.pi*0.25 )
-tan_hash = '7a11adc32645edcb323291748a3ba61540d1e88100eb27fc18eac3d5bcde57d2'
+print('Check numpi intrinsic tan() for range (+/- pi/2)')
+x = numpy.tan( (x01 - 0.5)*numpy.pi )
+tan_hash = '4f92be23557c12cca0426de0da530cfde43de1bd73502dac23b7ad896a4f62fd'
 assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
 
 #print('Check numpi intrinsic arcsin() for range of values')
