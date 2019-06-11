@@ -10,7 +10,7 @@ from numpy import *
 import ignore_this as _numpy
 
 def abs(x):
-    return _numpy.numpy.abs(x)
+    return _numpy.absolute(x)
 
 def reciprocal(x, n=9, verbose=False):
     """Returns 1/x"""
