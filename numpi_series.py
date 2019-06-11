@@ -8,9 +8,10 @@ from numpy import *
 
 # The following import gives this script hidden access to numpy
 import ignore_this as _numpy
+#from ignore_this import *
 
 def abs(x):
-    return _numpy.absolute(x)
+    return _numpy._numpy.abs(x)
 
 def reciprocal(x, n=9):
     """Returns 1/x"""
@@ -46,8 +47,6 @@ def calc_pi(n=5):
         if an==a: break
     r = an**2 * reciprocal(t)
     return r
-
-pi = calc_pi()
 
 def sin(a):
     """Returns sin(x)"""
@@ -136,10 +135,10 @@ def cos_series(x):
 def tan_series(x):
     """Returns tan(x) for x in range -pi/6 .. pi/6"""
     # http://oeis.org/A002430
-    N = [1, 1, 2, 17, 62, 1382, 21844, 929569, 6404582, 443861162, 18888466084, 113927491862, 58870668456604, 8374643517010684, 689005380505609448, 129848163681107301953, 1736640792209901647222]
+    N = _numpy._numpy.array([1, 1, 2, 17, 62, 1382, 21844, 929569, 6404582, 443861162, 18888466084, 113927491862, 58870668456604, 8374643517010684, 689005380505609448, 129848163681107301953, 1736640792209901647222])
     # http://oeis.org/A036279
-    D = [1, 3, 15, 315, 2835, 155925, 6081075, 638512875, 10854718875, 1856156927625, 194896477400625, 2900518163668125, 3698160658676859375, 1298054391195577640625, 263505041412702261046875, 122529844256906551386796875, 4043484860477916195764296875]
-    C = _numpy.array(N) / _numpy.array(D)
+    D = _numpy._numpy.array([1, 3, 15, 315, 2835, 155925, 6081075, 638512875, 10854718875, 1856156927625, 194896477400625, 2900518163668125, 3698160658676859375, 1298054391195577640625, 263505041412702261046875, 122529844256906551386796875, 4043484860477916195764296875])
+    C = N.astype(float) / D.astype(float)
     n, x2, xx, r = len(C), x*x, 1., 0.
     term = [1.] * (n)
     for k in range(1,n):
@@ -156,7 +155,7 @@ def tan(x):
     s[x<0] = -1.
     #n = floor( a / pi * 0.5 )
     #a = a - n * pi * 2
-    #j = ( _numpy.mod(n,2)==1 )
+    #j = ( _numpy._numpy.mod(n,2)==1 )
     #s[j] = -s[j]
     # Reduce range 45 ... 90 to 22.5 ... 45
     j4 = ( a>=0.25*pi )
@@ -166,9 +165,9 @@ def tan(x):
     a[j2] = 0.5 * a[j2]
     t = tan_series( a )
     t[j2] = 2.*t[j2] / ( ( 1. - t[j2] ) * ( 1. + t[j2] ) )
-    t = _numpy.minimum(1., t)
+    t = _numpy._numpy.minimum(1., t)
     d = ( 1. - t**2 )
     jinf = ( d == 0. ) # Catch division by zero
     t[j4] = 2.*t[j4] / maximum( 1.e-30, d[j4] )
-    t[jinf] = _numpy.inf
+    t[jinf] = 1.e300
     return t * s
