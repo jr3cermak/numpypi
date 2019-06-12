@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 import hashlib
-import numpi_series as numpy  # Module to test
+import numpypi_series as numpy  # Module to test
 
 def logistic_map(x, r=4.-1./32):
     """Logistic map r*x*(1-x)"""
@@ -90,12 +90,12 @@ assert compare_numbers(x, x, good_hash=max_hash), 'numpy.finfo.eps did not repro
 print('Check sqrt() for range 0 .. 1')
 x = numpy.sqrt( x01  )
 sqrt_hash = 'cb46fde585dc617517938e5ff545ed2cb35bf042c0aa7f48ed14ab02d003106e'
-assert compare_numbers(x, x, good_hash=sqrt_hash), 'numpi intrinsic sqrt() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=sqrt_hash), 'numpypi intrinsic sqrt() failed to reproduce recorded hash!'
 
 print('Check sqrt() for large numbers')
 x = numpy.sqrt( x01 * numpy.finfo(float).max  )
 sqrt_hash = '388bbf35441a36db561fb4b46d726d03a4dd7e5316f87218f876f0a4b07fc8a2'
-assert compare_numbers(x, x, good_hash=sqrt_hash), 'numpi intrinsic sqrt() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=sqrt_hash), 'numpypi intrinsic sqrt() failed to reproduce recorded hash!'
 
 # Special values
 
@@ -111,65 +111,65 @@ assert not compare_numbers(x, y, quiet=True), 'numpy intrinsics unexpectedly mat
 
 # Ranges to test direct series
 
-print('Check numpi intrinsic sin() for range +/- pi/4')
+print('Check numpypi intrinsic sin() for range +/- pi/4')
 x = numpy.sin( (x01 - 0.5)*numpy.pi*0.5 )
 sin_hash = '0c10836887ea83a871533c38fb118d6a0c762f194c39a014fb77e566c39a5737'
-assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=sin_hash), 'numpypi intrinsic sin() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic cos() for range +/- pi/4')
+print('Check numpypi intrinsic cos() for range +/- pi/4')
 x = numpy.cos( (x01 - 0.5)*numpy.pi*0.5 )
 cos_hash = '12162e89f1131bcf065ccdfccdb1b6989891b1a14eae82cd2c22d97eb358c526'
-assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=cos_hash), 'numpypi intrinsic cos() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic tan() for range +/- pi/8')
+print('Check numpypi intrinsic tan() for range +/- pi/8')
 x = numpy.tan( (x01 - 0.5)*numpy.pi*0.25 )
 tan_hash = '7a11adc32645edcb323291748a3ba61540d1e88100eb27fc18eac3d5bcde57d2'
-assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=tan_hash), 'numpypi intrinsic tan() failed to reproduce recorded hash!'
 
 # Range +/- pi/2
 
-print('Check numpi intrinsic sin() for range +/- pi/2')
+print('Check numpypi intrinsic sin() for range +/- pi/2')
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
 sin_hash = '335315f32056ec05061d21ede987e0fa2b5ca2a182005fd907fe939a9030382a'
-assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
-#assert x.min() >= -1., 'numpi sin(x)<-1 !'
-#assert x.max() <= 1., 'numpi sin(x)<-1 !'
+assert compare_numbers(x, x, good_hash=sin_hash), 'numpypi intrinsic sin() failed to reproduce recorded hash!'
+#assert x.min() >= -1., 'numpypi sin(x)<-1 !'
+#assert x.max() <= 1., 'numpypi sin(x)<-1 !'
 
-print('Check numpi intrinsic cos() for range +/- pi/2')
+print('Check numpypi intrinsic cos() for range +/- pi/2')
 x = numpy.cos( (x01 - 0.5)*numpy.pi )
 cos_hash = '2bfab3ef5e79c893ca72efbf033d73dd2c099245e3d229478b4a0af8b1f99330'
-assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
-#assert x.min() >= -1., 'numpi cos(x)<-1 !'
-#assert x.max() <= 1., 'numpi cos(x)<-1 !'
+assert compare_numbers(x, x, good_hash=cos_hash), 'numpypi intrinsic cos() failed to reproduce recorded hash!'
+#assert x.min() >= -1., 'numpypi cos(x)<-1 !'
+#assert x.max() <= 1., 'numpypi cos(x)<-1 !'
 
-print('Check numpi intrinsic tan() for range +/- pi/2')
+print('Check numpypi intrinsic tan() for range +/- pi/2')
 x = numpy.tan( (x01 - 0.5)*numpy.pi )
 tan_hash = '4f92be23557c12cca0426de0da530cfde43de1bd73502dac23b7ad896a4f62fd'
-assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=tan_hash), 'numpypi intrinsic tan() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic arcsin() for range +/ 3/4')
+print('Check numpypi intrinsic arcsin() for range +/ 3/4')
 x = numpy.arcsin( ( x01 - 1. ) * 1.5 )
 arcsin_hash = '72374df70534b71783f5eb19867ff1a30894a53e83775e594672487ace6888c0'
-assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpypi intrinsic arcsin() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic arcsin() for range +/- 1')
+print('Check numpypi intrinsic arcsin() for range +/- 1')
 x = numpy.arcsin( 2.*x01 - 1. )
 arcsin_hash = 'd0d329c09f4f7801b05a65c172b9895f272e61e6a3aca38eb6549acaf3289fd8'
-assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpypi intrinsic arcsin() failed to reproduce recorded hash!'
 
-#print('Check numpi intrinsic arccos() for range of values')
+#print('Check numpypi intrinsic arccos() for range of values')
 #x = numpy.arccos( 2.*x01 - 1. )
 #arccos_hash = '2db2ba8daaa85a5365cd0ae6b8bb90749f4fc29b61ffb8a9d0ca959b47014787'
-#assert compare_numbers(x, x, good_hash=arccos_hash), 'numpi intrinsic arccos() failed to reproduce recorded hash!'
+#assert compare_numbers(x, x, good_hash=arccos_hash), 'numpypi intrinsic arccos() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic arctan()')
+print('Check numpypi intrinsic arctan()')
 x = numpy.arctan( 2.*x01 - 1. )
 arctan_hash = '3df2c55b7cf61b3a359888b9f43b68809b6fcc582e58471f0bc87d7a4be66b20'
-assert compare_numbers(x, x, good_hash=arctan_hash), 'numpi intrinsic arctan() failed to reproduce recorded hash!'
+assert compare_numbers(x, x, good_hash=arctan_hash), 'numpypi intrinsic arctan() failed to reproduce recorded hash!'
 
-print('Check numpi intrinsic arctan2()')
+print('Check numpypi intrinsic arctan2()')
 a = numpy.pi * ( 2.*x01 - 1. ) # -pi .. pi
 x,y = numpy.cos( a ), numpy.sin( a )
 t = numpy.arctan2(y,x)
 arctan2_hash = '532f8153920cf010bc4155d3e2d0f08070fa31e1cb9dc8e3bb14d13d7db3e35c'
-assert compare_numbers(t, t, good_hash=arctan2_hash), 'numpi intrinsic arctan2() failed to reproduce recorded hash!'
+assert compare_numbers(t, t, good_hash=arctan2_hash), 'numpypi intrinsic arctan2() failed to reproduce recorded hash!'
