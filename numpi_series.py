@@ -172,3 +172,56 @@ def tan_series(x):
     for j in range(k,-1,-1):
         r = r + term[j]
     return r * x
+
+def arcsin_series(x):
+    """Returns arcsin(x) for x in range -3/4 .. 3/4"""
+    # https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+    n = 54 # Number of terms (54 for x=0.75)
+    N = _numpy._numpy.arange(1,2*n,2) # 1,3,5,...,2*n-1
+    D = _numpy._numpy.arange(2,2*n+1,2) # 2,4,6,...,2*n
+    rD = 1. / ( D ).astype(float)
+    C = N.astype(float) * rD # 1/2, 3/4, 5/6, ...
+    rK = 1. / ( (N+2) ).astype(float) # 1/3, 1/5, 1/7, ...
+    x2 = x**2
+    term = [1.] * (n)
+    term[0],xx = x, x
+    for j in range(1,n):
+        xx = xx * ( C[j-1] * x2 )
+        term[j] = xx * rK[j-1]
+    r = 0.
+    for j in range(n-1,-1,-1):
+        r = r + term[j]
+    return r
+
+def arcsin_1mx_series(x):
+    """Returns arcsin(1-x) for x in range 0 .. 1/4"""
+    # https://www.wolframalpha.com/input/?i=taylor+series+arcsin(1-x)
+    N = _numpy._numpy.array([1,1,3,5,35,63,231,143,6435,12155,46189,88179,676039,1300075,5014575])
+    D = _numpy._numpy.array([1,6,80,448,9216,45056,425984,655360,71303168,318767104,2818572288,12348030976,214748364800,927712935936,7971459301376])*2.
+    rD = 1. / ( D ).astype(float)
+    C = N.astype(float) * rD # 1/2, 3/4, 5/6, ...
+    y = sqrt( x )
+    root2 = sqrt( 2. )
+    n = len(N)
+    term = [1.] * (n)
+    term[0],yy = y, y
+    for j in range(1,n):
+        yy = yy * x # x = y**2
+        term[j] = yy * C[j]
+    r = 0.
+    for j in range(n-1,-1,-1):
+        r = r + term[j]
+    return 0.5*_numpy._numpy.pi - root2 * r
+
+def arcsin(x):
+    a = abs(x)
+    r = arcsin_series( a )
+    g = arcsin_1mx_series( 1. - a )
+    j = ( a>0.75 )
+    r[j] = g[j]
+    j = ( x<0 )
+    r[j] = -r[j]
+    return r
+
+def arccos(x):
+    return 0.5*_numpy._numpy.pi - arcsin(x)

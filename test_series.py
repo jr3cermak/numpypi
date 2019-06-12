@@ -147,11 +147,16 @@ x = numpy.tan( (x01 - 0.5)*numpy.pi )
 tan_hash = '4f92be23557c12cca0426de0da530cfde43de1bd73502dac23b7ad896a4f62fd'
 assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
 
-#print('Check numpi intrinsic arcsin() for range of values')
-#x = numpy.arcsin( 2.*x01 - 1. )
-#arcsin_hash = '0c8cc44f1b24b2fd2c18dccc0638a9f54758ebfdcdc21d600c7f1b2e647baf4a'
-#assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() failed to reproduce recorded hash!'
-#
+print('Check numpi intrinsic arcsin() for range +/ 3/4')
+x = numpy.arcsin( ( x01 - 1. ) * 1.5 )
+arcsin_hash = '72374df70534b71783f5eb19867ff1a30894a53e83775e594672487ace6888c0'
+assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() failed to reproduce recorded hash!'
+
+print('Check numpi intrinsic arcsin() for range +/- 1')
+x = numpy.arcsin( 2.*x01 - 1. )
+arcsin_hash = 'd0d329c09f4f7801b05a65c172b9895f272e61e6a3aca38eb6549acaf3289fd8'
+assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() failed to reproduce recorded hash!'
+
 #print('Check numpi intrinsic arccos() for range of values')
 #x = numpy.arccos( 2.*x01 - 1. )
 #arccos_hash = '2db2ba8daaa85a5365cd0ae6b8bb90749f4fc29b61ffb8a9d0ca959b47014787'
