@@ -89,21 +89,40 @@ x = numpy.array([ numpy.sin([numpy.pi/4]), numpy.cos([numpy.pi/4]), numpy.tan(nu
 y = numpy.array([ numpy.sqrt([2])/2, numpy.sqrt([2])/2,  1.0 ])
 assert not compare_numbers(x, y, quiet=True), 'numpy intrinsics unexpectedly matched!'
 
-print('Check numpi intrinsic sin() for range of values')
+# Ranges to test direct series
+
+print('Check numpi intrinsic sin() for range +/- pi/4')
+x = numpy.sin( (x01 - 0.5)*numpy.pi*0.5 )
+sin_hash = '0c10836887ea83a871533c38fb118d6a0c762f194c39a014fb77e566c39a5737'
+assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
+
+print('Check numpi intrinsic cos() for range +/- pi/4')
+x = numpy.cos( (x01 - 0.5)*numpy.pi*0.5 )
+cos_hash = '12162e89f1131bcf065ccdfccdb1b6989891b1a14eae82cd2c22d97eb358c526'
+assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
+
+print('Check numpi intrinsic tan() for range +/- pi/8')
+x = numpy.tan( (x01 - 0.5)*numpy.pi*0.25 )
+tan_hash = '7a11adc32645edcb323291748a3ba61540d1e88100eb27fc18eac3d5bcde57d2'
+assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
+
+# Range +/- pi/2
+
+print('Check numpi intrinsic sin() for range +/- pi/2')
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
 sin_hash = '55a84a92698cf49046099ffb2255750731c7dfb7441b24976865df84f55dd8f3'
 assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
 #assert x.min() >= -1., 'numpi sin(x)<-1 !'
 #assert x.max() <= 1., 'numpi sin(x)<-1 !'
 
-print('Check numpi intrinsic cos() for range of values')
+print('Check numpi intrinsic cos() for range +/- pi/2')
 x = numpy.cos( (x01 - 0.5)*numpy.pi )
 cos_hash = '3b0fa4779b3a4d882e91cb9a884bdf9e0ae25b0504e4da18173f4550af7fa2df'
 assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
 #assert x.min() >= -1., 'numpi cos(x)<-1 !'
 #assert x.max() <= 1., 'numpi cos(x)<-1 !'
 
-print('Check numpi intrinsic tan() for range (+/- pi/2)')
+print('Check numpi intrinsic tan() for range +/- pi/2')
 x = numpy.tan( (x01 - 0.5)*numpy.pi )
 tan_hash = '4f92be23557c12cca0426de0da530cfde43de1bd73502dac23b7ad896a4f62fd'
 assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed to reproduce recorded hash!'
