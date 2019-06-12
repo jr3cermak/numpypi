@@ -23,13 +23,15 @@ def reciprocal(x, n=9):
         r = r * ( 2. - x * r )
     return r * s
 
-def sqrt(x, n=9):
+def sqrt(x):
     """Returns sqrt(x)"""
     # https://en.wikipedia.org/wiki/Methods_of_computing_square_roots
     m,e = frexp(x) # Mantissa and exponent in base-2
-    r = ldexp(1.,(e/2).astype(int)) # First quess
-    for iter in range(n):
-        r = 0.5 * ( r + x / r )
+    r = ldexp(m,floor(0.5*e).astype(int)) # First quess
+    eps = _numpy._numpy.finfo(1.).eps
+    for iter in range(6):
+        d = 1. / maximum( eps, r )
+        r = 0.5 * ( r + x * d )
     return r
 
 def calc_pi(n=5):

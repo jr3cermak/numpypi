@@ -85,6 +85,18 @@ x = numpy.array([numpy.finfo(float).eps])
 max_hash = '78902dbbf3ee23e635e0b63fd65aea1e80d4a8b08559ea0bb884c7eb872e15d8'
 assert compare_numbers(x, x, good_hash=max_hash), 'numpy.finfo.eps did not reproduce'
 
+# sqrt()
+
+print('Check sqrt() for range 0 .. 1')
+x = numpy.sqrt( x01  )
+sqrt_hash = 'cb46fde585dc617517938e5ff545ed2cb35bf042c0aa7f48ed14ab02d003106e'
+assert compare_numbers(x, x, good_hash=sqrt_hash), 'numpi intrinsic sqrt() failed to reproduce recorded hash!'
+
+print('Check sqrt() for large numbers')
+x = numpy.sqrt( x01 * numpy.finfo(float).max  )
+sqrt_hash = '388bbf35441a36db561fb4b46d726d03a4dd7e5316f87218f876f0a4b07fc8a2'
+assert compare_numbers(x, x, good_hash=sqrt_hash), 'numpi intrinsic sqrt() failed to reproduce recorded hash!'
+
 # Special values
 
 print('Check that PI (numpy.pi) is bitwise as expected')
