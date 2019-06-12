@@ -73,15 +73,24 @@ print('...')
 x01_hash = 'b0e634899b6519687c044e0310b2ac9bf0e56704dcd70696749a9b84da2e3661'
 assert compare_numbers(x01, x01, good_hash=x01_hash), 'Generated test numbers did not reproduce!'
 
-print('Check that PI (numpy.pi) is bitwise as expected')
-x = numpy.array([numpy.pi])
-pi_hash = '8b5319c77d1df2dcfcc3c1d94ab549a29d2b8b9f61372dc803146cbb1d2800b9'
-assert compare_numbers(x, x, good_hash=pi_hash), 'numpy.pi did not reproduce'
+# Floating point range
 
 print('Check that maximum floating point number (numpy.finfo.max) is bitwise as expected')
 x = numpy.array([numpy.finfo(float).max])
 max_hash = 'dd46fdd197731f40f29d789fd02be525b10ff16ea3b7830c9f2c5b28131420ff'
-assert compare_numbers(x, x, good_hash=max_hash), 'numpy.pi did not reproduce'
+assert compare_numbers(x, x, good_hash=max_hash), 'numpy.finfo.mas did not reproduce'
+
+print('Check that floating point epsilon (numpy.finfo.eps) is bitwise as expected')
+x = numpy.array([numpy.finfo(float).eps])
+max_hash = '78902dbbf3ee23e635e0b63fd65aea1e80d4a8b08559ea0bb884c7eb872e15d8'
+assert compare_numbers(x, x, good_hash=max_hash), 'numpy.finfo.eps did not reproduce'
+
+# Special values
+
+print('Check that PI (numpy.pi) is bitwise as expected')
+x = numpy.array([numpy.pi])
+pi_hash = '8b5319c77d1df2dcfcc3c1d94ab549a29d2b8b9f61372dc803146cbb1d2800b9'
+assert compare_numbers(x, x, good_hash=pi_hash), 'numpy.pi did not reproduce'
 
 print('Check numpy intrinsics for special values')
 x = numpy.array([ numpy.sin([numpy.pi/4]), numpy.cos([numpy.pi/4]), numpy.tan(numpy.array([numpy.pi/4])) ])
