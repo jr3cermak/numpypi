@@ -162,7 +162,7 @@ assert compare_numbers(x, x, good_hash=arcsin_hash), 'numpi intrinsic arcsin() f
 #arccos_hash = '2db2ba8daaa85a5365cd0ae6b8bb90749f4fc29b61ffb8a9d0ca959b47014787'
 #assert compare_numbers(x, x, good_hash=arccos_hash), 'numpi intrinsic arccos() failed to reproduce recorded hash!'
 #
-#print('Check numpi intrinsic arctan() for range of values')
-#x = numpy.arctan( 2.*x01 - 1. )
-#arctan_hash = '51c4c9529631a1026159dd9479b4216de65807fd08b9c0a79f4ca44e686f8ae4'
-#assert compare_numbers(x, x, good_hash=arctan_hash), 'numpi intrinsic arctan() failed to reproduce recorded hash!'
+print('Check numpi intrinsic arctan() for range of values')
+x = numpy.arctan( 2.*x01 - 1. )
+arctan_hash = '3df2c55b7cf61b3a359888b9f43b68809b6fcc582e58471f0bc87d7a4be66b20'
+assert compare_numbers(x, x, good_hash=arctan_hash), 'numpi intrinsic arctan() failed to reproduce recorded hash!'

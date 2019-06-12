@@ -251,7 +251,7 @@ def arctan(x):
     r = arctan_1px( a - 1. )
     f = arctan_series( a )
     eps = _numpy._numpy.finfo(1.).eps
-    g = arctan_series( 1. / maximum( eps, a ) )
+    g = arctan_series( 1. / maximum( 0.125, a ) )
     g = 0.5 * _numpy._numpy.pi - g
     j = ( a < 0.5 )
     r[j] = f[j]
