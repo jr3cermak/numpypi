@@ -91,14 +91,14 @@ assert not compare_numbers(x, y, quiet=True), 'numpy intrinsics unexpectedly mat
 
 print('Check numpi intrinsic sin() for range of values')
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
-sin_hash = '595683d47ea28bcbb85cdce9433d1035e39b048a8a4cbc70cac8841df2a42b60'
+sin_hash = '55a84a92698cf49046099ffb2255750731c7dfb7441b24976865df84f55dd8f3'
 assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
 #assert x.min() >= -1., 'numpi sin(x)<-1 !'
 #assert x.max() <= 1., 'numpi sin(x)<-1 !'
 
 print('Check numpi intrinsic cos() for range of values')
 x = numpy.cos( (x01 - 0.5)*numpy.pi )
-cos_hash = '322ac2b21ffc8b2423d22cc7b77922a1e2e0863a2b8fe3ba05b92058a0debaf9'
+cos_hash = '3b0fa4779b3a4d882e91cb9a884bdf9e0ae25b0504e4da18173f4550af7fa2df'
 assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
 #assert x.min() >= -1., 'numpi cos(x)<-1 !'
 #assert x.max() <= 1., 'numpi cos(x)<-1 !'
