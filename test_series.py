@@ -110,14 +110,14 @@ assert compare_numbers(x, x, good_hash=tan_hash), 'numpi intrinsic tan() failed 
 
 print('Check numpi intrinsic sin() for range +/- pi/2')
 x = numpy.sin( (x01 - 0.5)*numpy.pi )
-sin_hash = '55a84a92698cf49046099ffb2255750731c7dfb7441b24976865df84f55dd8f3'
+sin_hash = '335315f32056ec05061d21ede987e0fa2b5ca2a182005fd907fe939a9030382a'
 assert compare_numbers(x, x, good_hash=sin_hash), 'numpi intrinsic sin() failed to reproduce recorded hash!'
 #assert x.min() >= -1., 'numpi sin(x)<-1 !'
 #assert x.max() <= 1., 'numpi sin(x)<-1 !'
 
 print('Check numpi intrinsic cos() for range +/- pi/2')
 x = numpy.cos( (x01 - 0.5)*numpy.pi )
-cos_hash = '3b0fa4779b3a4d882e91cb9a884bdf9e0ae25b0504e4da18173f4550af7fa2df'
+cos_hash = '2bfab3ef5e79c893ca72efbf033d73dd2c099245e3d229478b4a0af8b1f99330'
 assert compare_numbers(x, x, good_hash=cos_hash), 'numpi intrinsic cos() failed to reproduce recorded hash!'
 #assert x.min() >= -1., 'numpi cos(x)<-1 !'
 #assert x.max() <= 1., 'numpi cos(x)<-1 !'

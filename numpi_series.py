@@ -51,7 +51,7 @@ def calc_pi(n=5):
 def sin(a):
     """Returns sin(x)"""
     # https://en.wikipedia.org/wiki/Sine#Series_definition
-    one_eighty = calc_pi()
+    one_eighty = _numpy._numpy.pi # calc_pi()
     three_sixty = 2.*one_eighty
     ninety = 0.5*one_eighty
     x = 1. * array( a )
@@ -94,7 +94,7 @@ def sin_series(x):
 def cos(a):
     """Returns cos(x)"""
     # https://en.wikipedia.org/wiki/Trigonometric_functions#Power_series_expansion
-    one_eighty = calc_pi()
+    one_eighty = _numpy._numpy.pi # calc_pi()
     three_sixty = 2.*one_eighty
     ninety = 0.5*one_eighty
     x = 1. * array( a )
