@@ -75,7 +75,6 @@ assert compare_numbers(x01, x01, good_hash=x01_hash), 'Generated test numbers di
 
 print('Check that PI (numpy.pi) is bitwise as expected')
 x = numpy.array([numpy.pi])
-pi_hash = '00480a5872b06081f2bef0873fbcab680e9b910faeec9f7e9b71fd36f5b8c1a4'
 pi_hash = '8b5319c77d1df2dcfcc3c1d94ab549a29d2b8b9f61372dc803146cbb1d2800b9'
 assert compare_numbers(x, x, good_hash=pi_hash), 'numpy.pi did not reproduce'
 
