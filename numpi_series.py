@@ -225,3 +225,38 @@ def arcsin(x):
 
 def arccos(x):
     return 0.5*_numpy._numpy.pi - arcsin(x)
+
+def arctan_series(x):
+    """Returns arctan(x) for x in range -3/4 .. 3/4"""
+    # https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+    n = 56 # Number of terms (24 for x=0.5, 54 for x=0.75)
+    x2 = x**2
+    term, xx, s = [1.] * (n), 1., -1.
+    for j in range(1,n):
+        d = 1. / float(2*j+1)
+        xx = xx * x2
+        term[j], s = s * ( xx * d ), -s
+    r = 0.
+    for j in range(n-1,-1,-1):
+        r = r + term[j]
+    return r * x
+
+def arctan_1px(x):
+    d = 1. / ( 2. + x )
+    return 0.25*_numpy._numpy.pi + arctan_series( x * d )
+
+def arctan(x):
+    """Returns arctan(x)"""
+    a = abs(x)
+    r = arctan_1px( a - 1. )
+    f = arctan_series( a )
+    eps = _numpy._numpy.finfo(1.).eps
+    g = arctan_series( 1. / maximum( eps, a ) )
+    g = 0.5 * _numpy._numpy.pi - g
+    j = ( a < 0.5 )
+    r[j] = f[j]
+    j = ( a > 2. )
+    r[j] = g[j]
+    j = ( x<0 )
+    r[j] = -r[j]
+    return r
