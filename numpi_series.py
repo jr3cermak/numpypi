@@ -230,7 +230,7 @@ def arctan_series(x):
     """Returns arctan(x) for x in range -3/4 .. 3/4"""
     # https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
     n = 56 # Number of terms (24 for x=0.5, 54 for x=0.75)
-    x2 = x**2
+    x2 = minimum( 1., x**2 )
     term, xx, s = [1.] * (n), 1., -1.
     for j in range(1,n):
         d = 1. / float(2*j+1)
@@ -260,3 +260,24 @@ def arctan(x):
     j = ( x<0 )
     r[j] = -r[j]
     return r
+
+def arctan2(y,x):
+    """Returns arctan(y/x) with appropriate quadrant"""
+    eps = _numpy._numpy.finfo(1.).eps
+    rx = 1. / maximum( eps, abs(x) )
+    t = arctan( y * rx )
+    j = ( x<0 )
+    t[j] = -t[j]
+    j = ( ( x<0 ) & ( y>=0 ) )
+    t[j] = t[j] + _numpy._numpy.pi
+    j = ( ( x<0 ) & ( y<0 ) )
+    t[j] = t[j] - _numpy._numpy.pi
+    j = ( ( x==0 ) & ( y>0 ) )
+    t[j] = 0.5 * _numpy._numpy.pi
+    j = ( ( x==0 ) & ( y<0 ) )
+    t[j] = - 0.5 * _numpy._numpy.pi
+    j = ( y==0 )
+    t[j] = -copysign( _numpy._numpy.pi, y*x )[j]
+    j = ( ( x==0 ) & ( y==0 ) )
+    t[j] = _numpy._numpy.nan
+    return t
