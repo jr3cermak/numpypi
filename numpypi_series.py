@@ -85,15 +85,10 @@ def sin_series(x):
     """Returns sin(x) for x in range -pi/2 .. pi/2"""
     # https://en.wikipedia.org/wiki/Sine#Series_definition
     C=[1.,0.16666666666666666,0.05,0.023809523809523808,0.013888888888888888,0.00909090909090909,0.00641025641025641,0.004761904761904762,0.003676470588235294,0.0029239766081871343,0.002380952380952381,0.001976284584980237,0.0016666666666666668,0.0014245014245014246,0.0012315270935960591,0.001075268817204301,0.000946969696969697,0.0008403361344537816,0.0007507507507507507,0.0006747638326585695]
-    N, x2, r = 20, x**2, 0.
-    term = [1.] * (N)
-    for n in range(1,N):
-        k = 2*n+1
-        #term[n] = - term[n-1] * ( x2 / ( (k-1) * k ) )
-        term[n] = - term[n-1] * ( x2 * C[n] )
-    for j in range(n,-1,-1):
-        r = r + term[j]
-    return ( r * x )
+    N, x2, r = len(C), x**2, 1.
+    for j in range(N-1,0,-1):
+        r = 1. - C[j] * ( x2 * r )
+    return r * x
 
 def cos(a):
     """Returns cos(x)"""
@@ -131,12 +126,9 @@ def cos_series(x):
     """Returns cos(x) for x in reange -pi/2 .. pi/2"""
     # https://en.wikipedia.org/wiki/Trigonometric_functions#Power_series_expansion
     C=[1.,0.5,0.08333333333333333,0.03333333333333333,0.017857142857142856,0.011111111111111111,0.007575757575757576,0.005494505494505495,0.004166666666666667,0.0032679738562091504,0.002631578947368421,0.0021645021645021645,0.0018115942028985507,0.0015384615384615385,0.0013227513227513227,0.0011494252873563218,0.0010080645161290322,0.00089126559714795,0.0007936507936507937,0.0007112375533428165,0.000641025641025641]
-    N,x2,r = len(C), x**2, 0.
-    term = [1.] * (N)
-    for i in range(1,N):
-        term[i] = - term[i-1] * ( x2 * C[i] )
-    for i in range(N-1,-1,-1):
-        r = r + term[i]
+    N,x2,r = len(C), x**2, 1.
+    for j in range(N-1,0,-1):
+        r = 1. - C[j] * ( x2 * r )
     return r
 
 def tan(x):
@@ -170,13 +162,10 @@ def tan_series(x):
     # http://oeis.org/A036279
     D = _numpy._numpy.array([1, 3, 15, 315, 2835, 155925, 6081075, 638512875, 10854718875, 1856156927625, 194896477400625, 2900518163668125, 3698160658676859375, 1298054391195577640625, 263505041412702261046875, 122529844256906551386796875, 4043484860477916195764296875])
     C = N.astype(float) / D.astype(float)
-    n, x2, xx, r = len(C), x*x, 1., 0.
-    term = [1.] * (n)
-    for k in range(1,n):
-        xx = xx * x2
-        term[k] = xx * C[k]
-    for j in range(k,-1,-1):
-        r = r + term[j]
+    n,x2 = len(C), x**2
+    r = C[n-1]
+    for j in range(n-1,0,-1):
+        r = C[j-1] + x2 * r
     return r * x
 
 def arcsin_series(x):
@@ -238,15 +227,10 @@ def arctan_series(x):
     """Returns arctan(x) for x in range -3/4 .. 3/4"""
     # https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
     n = 56 # Number of terms (24 for x=0.5, 54 for x=0.75)
-    x2 = minimum( 1., x**2 )
-    term, xx, s = [1.] * (n), 1., -1.
-    for j in range(1,n):
-        d = 1. / float(2*j+1)
-        xx = xx * x2
-        term[j], s = s * ( xx * d ), -s
-    r = 0.
-    for j in range(n-1,-1,-1):
-        r = r + term[j]
+    x2,r = minimum( 1., x**2 ), 1. / float(2*n-1)
+    for j in range(n-1,0,-1):
+        d = 1. / float(2*j-1)
+        r = d - x2 * r
     return r * x
 
 def arctan_1px(x):
