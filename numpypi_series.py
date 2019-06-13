@@ -53,6 +53,7 @@ def calc_pi(n=5):
 def sin(a):
     """Returns sin(x)"""
     # https://en.wikipedia.org/wiki/Sine#Series_definition
+    if type(a) in (float,_numpy._numpy.float64): a = _numpy._numpy.array([a])
     one_eighty = _numpy._numpy.pi # calc_pi()
     three_sixty = 2.*one_eighty
     ninety = 0.5*one_eighty
@@ -77,6 +78,7 @@ def sin(a):
     c = cos_series(ninety-x)
     r = sin_series(x)
     r[j] = c[j]
+    if r.size==1: return ( r * fs )[0]
     return r * fs
 
 def sin_series(x):
@@ -96,6 +98,7 @@ def sin_series(x):
 def cos(a):
     """Returns cos(x)"""
     # https://en.wikipedia.org/wiki/Trigonometric_functions#Power_series_expansion
+    if type(a) in (float,_numpy._numpy.float64): a = _numpy._numpy.array([a])
     one_eighty = _numpy._numpy.pi # calc_pi()
     three_sixty = 2.*one_eighty
     ninety = 0.5*one_eighty
@@ -121,6 +124,7 @@ def cos(a):
     c = sin_series(ninety-x)
     r = cos_series(x)
     r[j] = c[j]
+    if r.size==1: return ( r * fs )[0]
     return r * fs
 
 def cos_series(x):
@@ -137,6 +141,7 @@ def cos_series(x):
 
 def tan(x):
     """Returns tan(x)"""
+    if type(x) in (float,_numpy._numpy.float64): x = _numpy._numpy.array([x])
     a = abs(x)
     s = 1. + 0.*a
     s[x<0] = -1.
@@ -155,6 +160,7 @@ def tan(x):
     d = 1. / maximum( 1.e-30, d )
     t[j4] = 2.*t[j4] * d[j4]
     t[jinf] = _numpy._numpy.inf
+    if t.size==1: return ( t * s )[0]
     return t * s
 
 def tan_series(x):
@@ -214,6 +220,7 @@ def arcsin_1mx_series(x):
     return 0.5*_numpy._numpy.pi - root2 * r
 
 def arcsin(x):
+    if type(x) in (float,_numpy._numpy.float64): x = _numpy._numpy.array([x])
     a = abs(x)
     r = arcsin_series( a )
     g = arcsin_1mx_series( 1. - a )
@@ -221,6 +228,7 @@ def arcsin(x):
     r[j] = g[j]
     j = ( x<0 )
     r[j] = -r[j]
+    if r.size==1: return r[0]
     return r
 
 def arccos(x):
@@ -247,6 +255,7 @@ def arctan_1px(x):
 
 def arctan(x):
     """Returns arctan(x)"""
+    if type(x) in (float,_numpy._numpy.float64): x = _numpy._numpy.array([x])
     a = abs(x)
     r = arctan_1px( a - 1. )
     f = arctan_series( a )
@@ -259,10 +268,13 @@ def arctan(x):
     r[j] = g[j]
     j = ( x<0 )
     r[j] = -r[j]
+    if r.size==1: return r[0]
     return r
 
 def arctan2(y,x):
     """Returns arctan(y/x) with appropriate quadrant"""
+    if type(x) in (float,_numpy._numpy.float64): x = _numpy._numpy.array([x])
+    if type(y) in (float,_numpy._numpy.float64): y = _numpy._numpy.array([y])
     eps = _numpy._numpy.finfo(1.).eps
     rx = 1. / maximum( eps, abs(x) )
     t = arctan( y * rx )
@@ -280,4 +292,5 @@ def arctan2(y,x):
     t[j] = -copysign( _numpy._numpy.pi, y*x )[j]
     j = ( ( x==0 ) & ( y==0 ) )
     t[j] = _numpy._numpy.nan
+    if t.size==1: return t[0]
     return t
