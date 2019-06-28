@@ -59,9 +59,10 @@ def sin(a):
     ninety = 0.5*one_eighty
     x = 1. * array( a )
     fs = 1. + 0. * x
-    # Anything < -90 reflect to >-90...
-    j = ( x < -ninety )
-    x[j] = -one_eighty - x[j]
+    # Anything < 0 reflect to >0...
+    j = ( x < 0. )
+    x[j] = - x[j]
+    fs[j] = -1.
     # Anything > 360 shift to range 0...360
     j = ( x > three_sixty )
     n = floor( x / three_sixty )
@@ -69,7 +70,7 @@ def sin(a):
     # Anything in range 180...360 shift to 0...180
     j = ( x >= one_eighty )
     x[j] = x[j] - one_eighty
-    fs[j] = -1.
+    fs[j] = -fs[j]
     # Anything in range 90...180 reflect to 90...0
     j = ( x > ninety )
     x[j] = one_eighty - x[j]
