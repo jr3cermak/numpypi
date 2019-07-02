@@ -57,6 +57,7 @@ def sin(a):
     one_eighty = _numpy._numpy.pi # calc_pi()
     three_sixty = 2.*one_eighty
     ninety = 0.5*one_eighty
+    r_three_sixty = 1. / three_sixty
     x = 1. * array( a )
     fs = 1. + 0. * x
     # Anything < 0 reflect to >0...
@@ -65,7 +66,7 @@ def sin(a):
     fs[j] = -1.
     # Anything > 360 shift to range 0...360
     j = ( x > three_sixty )
-    n = floor( x / three_sixty )
+    n = floor( x * r_three_sixty )
     x[j] = x[j] - n[j] * three_sixty
     # Anything in range 180...360 shift to 0...180
     j = ( x >= one_eighty )
@@ -98,6 +99,7 @@ def cos(a):
     one_eighty = _numpy._numpy.pi # calc_pi()
     three_sixty = 2.*one_eighty
     ninety = 0.5*one_eighty
+    r_three_sixty = 1. / three_sixty
     x = 1. * array( a )
     fs = 1. + 0. * x
     # Anything < 0 reflect to >0...
@@ -105,7 +107,7 @@ def cos(a):
     x[j] = -x[j]
     # Anything > 360 shift to range 0...360
     j = ( x > three_sixty )
-    n = floor( x / three_sixty )
+    n = floor( x * r_three_sixty )
     x[j] = x[j] - n[j] * three_sixty
     # Anything in range 180...360 shift to 0...180
     j = ( x >= one_eighty )
