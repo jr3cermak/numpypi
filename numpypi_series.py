@@ -273,7 +273,10 @@ def arctan2(y,x):
     t[j] = 0.5 * _numpy._numpy.pi
     j = ( ( x==0 ) & ( y<0 ) )
     t[j] = - 0.5 * _numpy._numpy.pi
+    # Special cases to handle three values for when y==0
     j = ( y==0 )
+    t[j] = 0
+    j = ( ( y==0 ) & ( x<0 ) )
     t[j] = -copysign( _numpy._numpy.pi, y*x )[j]
     j = ( ( x==0 ) & ( y==0 ) )
     t[j] = _numpy._numpy.nan
