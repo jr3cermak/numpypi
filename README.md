@@ -39,11 +39,11 @@ python test_trunc.py
 In python
 
 ```python
-import numpypi_series
+import numpypi.numpypi_series
 ```
 
 or (be careful!)
 
 ```python
-import numpypi_series as numpy
+import numpypi.numpypi_series as numpy
 ```

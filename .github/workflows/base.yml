@@ -48,17 +48,14 @@ jobs:
       # The worker drops you in the middle of your checked out repository
       - name: Install
         run: |
-          #conda env create -f=conda/gridTools_export.yml
-          #conda activate gridTools
-          #python -m pip install .
-          conda info
+          python -m pip install .
 
       # Run tests
       - name: Tests
         run: |
           cd ${{ github.workspace }}
-          #conda activate gridTools
-          #cd tests
-          #pytest
+          cd tests
+          python test_series.py
+          python test_trunc.py
 
 
