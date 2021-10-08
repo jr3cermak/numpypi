@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 import hashlib
-import numpypi_series as numpy  # Module to test
+import numpypi.numpypi_series as numpy  # Module to test
 
 def logistic_map(x, r=4.-1./32):
     """Logistic map r*x*(1-x)"""

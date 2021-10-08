@@ -7,7 +7,7 @@ from __future__ import print_function
 from numpy import *
 
 # The following import gives this script hidden access to numpy
-import ignore_this as _numpy
+from . import ignore_this as _numpy
 
 global __default_bits
 __default_bits = None
