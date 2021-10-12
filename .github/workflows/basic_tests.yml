@@ -14,5 +14,3 @@ jobs:
       run: python3 -m pip install numpy
     - name: numpypi series test
       run: python3 -m unittest tests/test_series.py
-    - name: numpypi trunc test
-      run: python3 -m unittest tests/test_trunc.py

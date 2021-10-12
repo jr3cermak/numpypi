@@ -31,7 +31,6 @@
 
 ```bash
 python test_series.py
-python test_trunc.py
 ```
 
 ## To use
