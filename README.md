@@ -27,7 +27,7 @@
 ## Where?
 
 - Works on Linux, Windows and Mac and for both python2 and python3.
-- Regularly tested with Travis-CI and on various linux platforms.
+- Regularly tested with GitHub Actions.
 
 ## Test?
 
