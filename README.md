@@ -1,3 +1,5 @@
+[![basic tests](https://github.com/adcroft/numpypi/actions/workflows/basic_tests.yml/badge.svg)](https://github.com/adcroft/numpypi/actions/workflows/basic_tests.yml)
+
 # Portable intrinsics for numpy (numpypi)
 
 ## Warnings!

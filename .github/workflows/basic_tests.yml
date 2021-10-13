@@ -3,13 +3,18 @@ name: basic tests
 on: [push, pull_request]
 
 jobs:
-  basictests:
-    runs-on: ubuntu-latest
+  test-suite:
+    name: Test ${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-18.04, ubuntu-latest]
+        python: [3.5, 3.6, 3.7, 3.8]
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
-        python-version: '>=3.6'
+        python-version: ${{ matrix.python }}
     - name: Install numpy
       run: python3 -m pip install numpy
     - name: numpypi series test
