@@ -106,7 +106,7 @@ assert compare_numbers(x, x, good_hash=pi_hash), 'numpy.pi did not reproduce'
 
 print('Check numpy intrinsics for special values')
 x = numpy.array([ numpy.sin([numpy.pi/4]), numpy.cos([numpy.pi/4]), numpy.tan(numpy.array([numpy.pi/4])) ])
-y = numpy.array([ numpy.sqrt([2])/2, numpy.sqrt([2])/2,  1.0 ])
+y = numpy.array([ numpy.sqrt([2])/2, numpy.sqrt([2])/2,  1.0 ], dtype=object)
 assert not compare_numbers(x, y, quiet=True), 'numpy intrinsics unexpectedly matched!'
 
 # Ranges to test direct series

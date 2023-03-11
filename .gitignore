@@ -6,6 +6,9 @@ __pycache__
 *.nc
 *.cdl
 
+# Build folder
+/build/
+
 # Setuptools distribution folder
 /dist/
 

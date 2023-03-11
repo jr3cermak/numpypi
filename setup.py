@@ -1,14 +1,13 @@
 from setuptools import find_packages, setup
-import numpypi
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="numpypi",
-    version=numpypi.__version__,
-    author="Alistair Adcroft",
-    author_email="alistair.adcroft@noaa.gov",
+    version="1.0.0",
+    author="Alistair Adcroft, Niki Zadeh",
+    author_email="alistair.adcroft@noaa.gov, niki.zadeh@noaa.gov",
     maintainer="Rob Cermak",
     maintainer_email="rob.cermak@gmail.com",
     description="Portable intrinsics for numpy",
@@ -20,7 +19,6 @@ setup(
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Development Status :: 3 - Alpha",
         "Operating System :: OS Independent",
         "Intended Audience :: Science/Research",
     ],
