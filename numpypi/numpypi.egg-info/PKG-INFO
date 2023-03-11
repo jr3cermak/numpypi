@@ -1,4 +1,15 @@
-[![basic tests](https://github.com/adcroft/numpypi/actions/workflows/basic_tests.yml/badge.svg)](https://github.com/adcroft/numpypi/actions/workflows/basic_tests.yml)
+Metadata-Version: 2.1
+Name: numpypi
+Version: 0.0.1
+Summary: Portable intrinsics for numpy
+Home-page: https://github.com/adcroft/numpypi
+Author: Alistair Adcroft
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/adcroft/numpypi/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
 
 # Portable intrinsics for numpy (numpypi)
 
@@ -27,7 +38,7 @@
 ## Where?
 
 - Works on Linux, Windows and Mac and for both python2 and python3.
-- Regularly tested with GitHub Actions.
+- Regularly tested with Travis-CI and on various linux platforms.
 
 ## Test?
 
@@ -40,12 +51,13 @@ python test_series.py
 In python
 
 ```python
-import numpypi.numpypi_series
+import numpypi_series
 ```
 
 or (be careful!)
 
 ```python
-import numpypi.numpypi_series as numpy
+import numpypi_series as numpy
 ```
-9
+
+

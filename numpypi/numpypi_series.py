@@ -7,7 +7,7 @@ from __future__ import print_function
 from numpy import *
 
 # The following import gives this script hidden access to numpy
-import numpypi.ignore_this as _numpy
+from . import ignore_this as _numpy
 #from ignore_this import *
 
 def abs(x):
