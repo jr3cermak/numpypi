@@ -1,5 +1,5 @@
 
-__all__ = ["ignore_this", "numpypi_series", "numpypi_trunc"]
+__all__ = ["ignore_this", "numpypi_series"]
 
 import os
 import subprocess
