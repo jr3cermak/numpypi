@@ -26,7 +26,7 @@
 
 ## Where?
 
-- Works on Linux, Windows and Mac and for both python2 and python3.
+- Works on Linux, Windows and Mac and for python3.
 - Regularly tested with GitHub Actions.
 
 ## Test?
