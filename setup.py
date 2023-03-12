@@ -23,6 +23,6 @@ setup(
         "Intended Audience :: Science/Research",
     ],
     packages=find_packages(exclude=['notebooks','tests']),
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     install_requires=['numpy'],
 )
