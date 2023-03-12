@@ -27,6 +27,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
       # Initialize conda environment
       - uses: conda-incubator/setup-miniconda@v2
         with:
